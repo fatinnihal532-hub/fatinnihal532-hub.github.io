@@ -331,6 +331,27 @@
   .honors .yr{ font-family:var(--font-mono); font-size:.78rem; color:var(--copper); font-variant-numeric:tabular-nums; }
   .honors .stat{ font-family:var(--font-mono); font-size:.78rem; color:var(--ink-faint); text-align:right; white-space:nowrap; }
 
+  /* Certificates */
+  .certs{ display:grid; grid-template-columns:repeat(3,1fr); gap:1.1rem; }
+  @media (max-width:900px){ .certs{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:560px){ .certs{ grid-template-columns:1fr; } }
+  .cert{
+    display:block; border:1px solid var(--line); border-radius:3px; overflow:hidden;
+    background:var(--panel); color:inherit; text-decoration:none;
+    transition:border-color .15s ease, transform .15s ease;
+  }
+  .cert:hover{ border-color:var(--copper); transform:translateY(-2px); }
+  .cert-img{ display:block; background:var(--panel-2); border-bottom:1px solid var(--line); }
+  .cert-img img{ display:block; width:100%; height:168px; object-fit:cover; object-position:top center; }
+  .cert-body{ padding:.9rem 1rem 1.05rem; }
+  .cert .code{
+    font-family:var(--font-mono); font-size:.72rem; color:var(--ink-faint);
+    display:flex; justify-content:space-between; gap:.6rem; margin-bottom:.45rem;
+  }
+  .cert h3{ margin:0 0 .35rem; font-size:.94rem; font-weight:600; line-height:1.35; }
+  .cert p{ margin:0; font-size:.82rem; color:var(--ink-soft); }
+  .cert .view{ display:block; margin-top:.65rem; font-family:var(--font-mono); font-size:.72rem; color:var(--copper); }
+
   .langs{ display:flex; flex-wrap:wrap; gap:1.6rem; }
   .langs .lg b{ display:block; font-size:.98rem; }
   .langs .lg span{ font-family:var(--font-mono); font-size:.76rem; color:var(--ink-faint); }
@@ -444,6 +465,7 @@
         <li><a href="#industry"><span class="pin">06</span>Industry</a></li>
         <li><a href="#skills"><span class="pin">07</span>Skills</a></li>
         <li><a href="#honors"><span class="pin">08</span>Honors</a></li>
+        <li><a href="#certificates"><span class="pin">09</span>Certificates</a></li>
       </ol>
     </nav>
     <div class="rail-bottom">
@@ -647,7 +669,7 @@
       </div>
       <div class="skill-group" style="margin-top:1.4rem;">
         <h4>Certifications</h4>
-        <div class="chips"><span class="chip">PLC Programming &mdash; Udemy</span></div>
+        <div class="chips"><span class="chip">PLC Programming &mdash; Udemy</span><span class="chip">Trial and Error 2.0 &mdash; C &amp; Arduino Workshop, EEE Makers Hub</span></div>
       </div>
     </section>
 
@@ -669,6 +691,57 @@
         <div class="lg"><b>Bengali</b><span>Native</span></div>
         <div class="lg"><b>English</b><span>Full professional proficiency</span></div>
         <div class="lg"><b>Hindi</b><span>Limited working proficiency</span></div>
+      </div>
+    </section>
+    <section id="certificates" class="reveal">
+      <div class="sec-head"><span class="num">09</span><h2>Certificates</h2><span class="rule"></span></div>
+
+      <div class="certs">
+        <a class="cert" href="certificates/deans-award-2021-22.jpg" target="_blank" rel="noopener">
+          <span class="cert-img"><img src="certificates/deans-award-2021-22.jpg" alt="Dean&rsquo;s Award certificate, Academic Session 2021-2022" loading="lazy"></span>
+          <div class="cert-body">
+            <div class="code"><span>Dean&rsquo;s List</span><span>2021&ndash;22</span></div>
+            <h3>Dean&rsquo;s Award, KUET &mdash; 2nd Year</h3>
+            <p>Faculty of Electrical &amp; Electronic Engineering &middot; GPA 3.79/4.00</p>
+            <span class="view">View certificate &nearr;</span>
+          </div>
+        </a>
+        <a class="cert" href="certificates/deans-award-2020-21.jpg" target="_blank" rel="noopener">
+          <span class="cert-img"><img src="certificates/deans-award-2020-21.jpg" alt="Dean&rsquo;s Award certificate, Academic Session 2020-2021" loading="lazy"></span>
+          <div class="cert-body">
+            <div class="code"><span>Dean&rsquo;s List</span><span>2020&ndash;21</span></div>
+            <h3>Dean&rsquo;s Award, KUET &mdash; 1st Year</h3>
+            <p>Faculty of Electrical &amp; Electronic Engineering &middot; GPA 3.92/4.00</p>
+            <span class="view">View certificate &nearr;</span>
+          </div>
+        </a>
+        <a class="cert" href="certificates/ieee-technical-secretary.jpg" target="_blank" rel="noopener">
+          <span class="cert-img"><img src="certificates/ieee-technical-secretary.jpg" alt="IEEE KUET Student Branch certificate of achievement" loading="lazy"></span>
+          <div class="cert-body">
+            <div class="code"><span>Achievement</span><span>2025&ndash;26</span></div>
+            <h3>Technical Secretary</h3>
+            <p>IEEE KUET Student Branch &middot; Session 2025&ndash;2026</p>
+            <span class="view">View certificate &nearr;</span>
+          </div>
+        </a>
+        <a class="cert" href="certificates/kuet-techforge-pr-secretary.jpg" target="_blank" rel="noopener">
+          <span class="cert-img"><img src="certificates/kuet-techforge-pr-secretary.jpg" alt="KUET TechForge certificate of recognition" loading="lazy"></span>
+          <div class="cert-body">
+            <div class="code"><span>Recognition</span><span>2025&ndash;26</span></div>
+            <h3>Public Relations Secretary</h3>
+            <p>KUET TechForge &middot; September 2025 &ndash; August 2026</p>
+            <span class="view">View certificate &nearr;</span>
+          </div>
+        </a>
+        <a class="cert" href="certificates/trial-and-error-2-workshop.jpg" target="_blank" rel="noopener">
+          <span class="cert-img"><img src="certificates/trial-and-error-2-workshop.jpg" alt="Certificate of participation, Trial and Error 2.0 workshop" loading="lazy"></span>
+          <div class="cert-body">
+            <div class="code"><span>Participation</span><span>2022</span></div>
+            <h3>Trial and Error 2.0</h3>
+            <p>C Programming &amp; Arduino workshop, 5 days &middot; EEE Makers Hub</p>
+            <span class="view">View certificate &nearr;</span>
+          </div>
+        </a>
       </div>
     </section>
   </main>
