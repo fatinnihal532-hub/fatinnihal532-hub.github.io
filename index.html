@@ -648,7 +648,7 @@
 
     <section id="firmware" class="reveal">
       <div class="sec-head"><span class="num">06</span><h2>Firmware &amp; Simulation</h2><span class="rule"></span></div>
-      <p class="lede" style="margin:0 0 1.1rem">Seven repositories written from scratch, outside coursework. Five are firmware, three of which run end to end in a browser simulator, so anyone can open a link and watch the code execute without buying a single component. The last two are power electronics models, where every figure and every number in the write-up is regenerated from the simulation and held against closed-form theory by a test suite.</p>
+      <p class="lede" style="margin:0 0 1.1rem">Seven repositories written from scratch, outside coursework. Five are firmware, three of which run end to end in a browser simulator, so anyone can open a link and watch the code execute without buying a single component. The last two are power electronics models, where every figure and every number in the write-up is regenerated from the simulation and held against closed-form theory by a test suite. Both run in Google Colab from one click.</p>
 
       <div class="grid-2">
         <div class="proj" data-index="01">
@@ -692,14 +692,14 @@
           <div class="code"><span>Power Electronics</span><span>2026</span></div>
           <h3>Three-Phase SPWM Inverter Model</h3>
           <p>A two-level voltage source inverter solved as a block diagram on a fixed-step RK4 engine, comparing sinusoidal PWM against third-harmonic injection and SVPWM. Zero-sequence injection is <em>measured</em> to buy <span class="spec">15.4 % more line voltage</span> from the same DC bus, against a theoretical 15.47 % &mdash; or, read the other way, a bus 13.3 % lower for the same motor voltage. THD and the harmonic spectrum are taken from the simulated waveform, not quoted.</p>
-          <div class="links"><a href="https://github.com/fatinnihal532-hub/spwm-inverter-model" target="_blank" rel="noopener">Code &#8599;</a></div>
+          <div class="links"><a href="https://github.com/fatinnihal532-hub/spwm-inverter-model" target="_blank" rel="noopener">Code &#8599;</a><a href="https://colab.research.google.com/github/fatinnihal532-hub/spwm-inverter-model/blob/main/run_in_colab.ipynb" target="_blank" rel="noopener">Run it &#8599;</a></div>
         </div>
 
         <div class="proj" data-index="07">
           <div class="code"><span>Control / SMPS</span><span>2026</span></div>
           <h3>Digital Buck Converter Control</h3>
           <p>A 24 V to 12 V synchronous buck at 100 kHz and the digital loop around it: k-factor compensator design on a Bode plot, pre-warped Tustin discretisation, then a switching model that quantises the measurement and delays the computation by a sample. A <span class="spec">type III at 4 kHz</span> cuts the load-step dip from 13.9 % to 6.4 % and recovers nine times faster. One design is deliberately wrong, to show why phase margin alone is not a stability test.</p>
-          <div class="links"><a href="https://github.com/fatinnihal532-hub/digital-buck-control" target="_blank" rel="noopener">Code &#8599;</a></div>
+          <div class="links"><a href="https://github.com/fatinnihal532-hub/digital-buck-control" target="_blank" rel="noopener">Code &#8599;</a><a href="https://colab.research.google.com/github/fatinnihal532-hub/digital-buck-control/blob/main/run_in_colab.ipynb" target="_blank" rel="noopener">Run it &#8599;</a></div>
         </div>
       </div>
     </section>
