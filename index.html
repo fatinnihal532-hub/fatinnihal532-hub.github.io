@@ -701,6 +701,13 @@
           <p>A 24 V to 12 V synchronous buck at 100 kHz and the digital loop around it: k-factor compensator design on a Bode plot, pre-warped Tustin discretisation, then a switching model that quantises the measurement and delays the computation by a sample. A <span class="spec">type III at 4 kHz</span> cuts the load-step dip from 13.9 % to 6.4 % and recovers nine times faster. One design is deliberately wrong, to show why phase margin alone is not a stability test.</p>
           <div class="links"><a href="https://github.com/fatinnihal532-hub/digital-buck-control" target="_blank" rel="noopener">Code &#8599;</a><a href="https://colab.research.google.com/github/fatinnihal532-hub/digital-buck-control/blob/main/run_in_colab.ipynb" target="_blank" rel="noopener">Run it &#8599;</a></div>
         </div>
+
+        <div class="proj" data-index="08">
+          <div class="code"><span>Battery Management</span><span>2026</span></div>
+          <h3>Li-Ion SOC Estimation: Coulomb Counting vs. EKF</h3>
+          <p>A two-state Extended Kalman Filter measured against a Coulomb counter on a synthetic EV current profile through a Thevenin battery model with a realistic flat-plateau OCV curve. With a correct model both are already accurate; the gap shows up elsewhere &mdash; the EKF recovers from a 6-point SOC error in <span class="spec">16 s</span> where Coulomb counting never does, and it is far more sensitive to a wrong internal resistance than to a wrong capacity, the opposite of Coulomb counting's blind spot. Eleven checks in verify.py pin every claim to closed-form theory.</p>
+          <div class="links"><a href="https://github.com/fatinnihal532-hub/liion-soc-ekf" target="_blank" rel="noopener">Code &#8599;</a><a href="https://colab.research.google.com/github/fatinnihal532-hub/liion-soc-ekf/blob/main/run_in_colab.ipynb" target="_blank" rel="noopener">Run it &#8599;</a></div>
+        </div>
       </div>
     </section>
 
