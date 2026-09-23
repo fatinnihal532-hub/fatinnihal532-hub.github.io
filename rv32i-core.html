@@ -13,7 +13,7 @@
 </head>
 <body>
 <main class="wrap">
-  <a class="back" href="../#project-rv32i">&larr; Back to portfolio</a>
+  <a class="back" href="./#project-rv32i">&larr; Back to portfolio</a>
 
   <p class="eyebrow">Write-up &middot; Digital design / VLSI</p>
   <h1>Building a RISC-V CPU, and the bug that only showed up as a hang</h1>
@@ -29,7 +29,7 @@
 
   <h2>Design</h2>
   <figure>
-    <img class="light-only" src="img/rv32i_datapath.svg" alt="Block diagram of the single-cycle RV32I datapath: PC, instruction memory, control, immediate generator, register file, ALU and data memory">
+    <img class="light-only" src="rv32i_datapath.svg" alt="Block diagram of the single-cycle RV32I datapath: PC, instruction memory, control, immediate generator, register file, ALU and data memory">
     <figcaption>The datapath. Every instruction completes in one clock cycle.</figcaption>
   </figure>
   <p>The core implements every RV32I instruction: arithmetic, logic, shifts, loads and stores of bytes, halfwords and words, all six branches, jumps, and the two upper-immediate instructions. It is single-cycle on purpose. A pipeline would add hazards, forwarding and stalls, and I wanted the first design to be one I could verify completely before adding that complexity.</p>
@@ -56,7 +56,7 @@
   <div class="links">
     <a href="https://github.com/fatinnihal532-hub/rv32i-core">Code and full README &#8599;</a>
     <a href="https://colab.research.google.com/github/fatinnihal532-hub/rv32i-core/blob/main/run_in_colab.ipynb">Run it in Colab &#8599;</a>
-    <a href="../">Portfolio</a>
+    <a href="./">Portfolio</a>
   </div>
 </main>
 </body>

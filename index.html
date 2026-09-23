@@ -577,19 +577,19 @@
       <div class="featured" aria-labelledby="featuredHead">
         <p class="featured-head" id="featuredHead">Start here &middot; three featured projects</p>
         <div class="featured-grid">
-          <a class="feat" href="writeups/hemt-design-space.html">
+          <a class="feat" href="hemt-design-space.html">
             <span class="feat-tag">Device physics</span>
             <span class="feat-title">AlGaN/GaN HEMT design-space search</span>
             <span class="feat-line">432 designs searched; the Pareto front recovers the power-HEMT design rule on its own.</span>
             <span class="feat-cta">Read the write-up &rarr;</span>
           </a>
-          <a class="feat" href="writeups/rv32i-core.html">
+          <a class="feat" href="rv32i-core.html">
             <span class="feat-tag">Digital design / VLSI</span>
             <span class="feat-title">RV32I RISC-V core in Verilog</span>
             <span class="feat-line">Full base ISA, 32 tests, synthesized to 3,918 gates, plus the loop bug verification caught.</span>
             <span class="feat-cta">Read the write-up &rarr;</span>
           </a>
-          <a class="feat" href="writeups/spwm-inverter.html">
+          <a class="feat" href="spwm-inverter.html">
             <span class="feat-tag">Power electronics</span>
             <span class="feat-title">Three-phase SPWM inverter model</span>
             <span class="feat-line">Measures the 15.4% bus-voltage gain of SVPWM against a theoretical 15.47%.</span>
@@ -658,7 +658,7 @@
           <div class="code"><span>Device physics</span><span>2026</span></div>
           <h3>AlGaN/GaN HEMT Design-Space Explorer</h3>
           <p>A compact model built on Ambacher&rsquo;s polarization charge control, with velocity saturation and source/drain access resistance, swept over 432 combinations of gate length, gate-drain spacing, barrier thickness and Al fraction. It extracts V<sub>th</sub>, g<sub>m</sub>, SS, DIBL and R<sub>on</sub> the way a TCAD post-processing script would, and finds the <span class="spec">R<sub>on</sub>&ndash;breakdown Pareto front</span>: every optimal design uses the shortest gate and highest Al fraction, and buys voltage with gate-drain spacing.</p>
-          <div class="links"><a href="writeups/hemt-design-space.html">Write-up</a><a href="https://github.com/fatinnihal532-hub/algan-gan-hemt-dse" target="_blank" rel="noopener">Code &#8599;</a><a href="https://colab.research.google.com/github/fatinnihal532-hub/algan-gan-hemt-dse/blob/main/run_in_colab.ipynb" target="_blank" rel="noopener">Run it &#8599;</a></div>
+          <div class="links"><a href="hemt-design-space.html">Write-up</a><a href="https://github.com/fatinnihal532-hub/algan-gan-hemt-dse" target="_blank" rel="noopener">Code &#8599;</a><a href="https://colab.research.google.com/github/fatinnihal532-hub/algan-gan-hemt-dse/blob/main/run_in_colab.ipynb" target="_blank" rel="noopener">Run it &#8599;</a></div>
         </div>
 
         <div class="proj" data-index="R2">
@@ -671,7 +671,7 @@
           <div class="code"><span>Digital design / VLSI</span><span>2026</span></div>
           <h3>RV32I RISC-V Core, from RTL to Gate-Level Netlist</h3>
           <p>A single-cycle CPU in Verilog implementing the full RV32I base integer ISA, with a two-pass assembler written from scratch so test programs are readable source. Verified by 30 directed instruction tests and two end-to-end programs checked against independent Python models, linted with Verilator, and synthesized with Yosys to <span class="spec">3,918 generic gates and 992 flip-flops</span> (technology-independent; no area or timing claimed without a real PDK). Verification caught a real bug: register-file forwarding that formed a combinational loop on <code>addi t0, t0, -1</code>.</p>
-          <div class="links"><a href="writeups/rv32i-core.html">Write-up</a><a href="https://github.com/fatinnihal532-hub/rv32i-core" target="_blank" rel="noopener">Code &#8599;</a><a href="https://colab.research.google.com/github/fatinnihal532-hub/rv32i-core/blob/main/run_in_colab.ipynb" target="_blank" rel="noopener">Run it &#8599;</a></div>
+          <div class="links"><a href="rv32i-core.html">Write-up</a><a href="https://github.com/fatinnihal532-hub/rv32i-core" target="_blank" rel="noopener">Code &#8599;</a><a href="https://colab.research.google.com/github/fatinnihal532-hub/rv32i-core/blob/main/run_in_colab.ipynb" target="_blank" rel="noopener">Run it &#8599;</a></div>
         </div>
       </div>
     </section>
@@ -742,7 +742,7 @@
           <div class="code"><span>Power Electronics</span><span>2026</span></div>
           <h3>Three-Phase SPWM Inverter Model</h3>
           <p>A two-level voltage source inverter solved as a block diagram on a fixed-step RK4 engine, comparing sinusoidal PWM against third-harmonic injection and SVPWM. Zero-sequence injection is <em>measured</em> to buy <span class="spec">15.4 % more line voltage</span> from the same DC bus, against a theoretical 15.47 % &mdash; or, read the other way, a bus 13.3 % lower for the same motor voltage. THD and the harmonic spectrum are taken from the simulated waveform, not quoted.</p>
-          <div class="links"><a href="writeups/spwm-inverter.html">Write-up</a><a href="https://github.com/fatinnihal532-hub/spwm-inverter-model" target="_blank" rel="noopener">Code &#8599;</a><a href="https://colab.research.google.com/github/fatinnihal532-hub/spwm-inverter-model/blob/main/run_in_colab.ipynb" target="_blank" rel="noopener">Run it &#8599;</a></div>
+          <div class="links"><a href="spwm-inverter.html">Write-up</a><a href="https://github.com/fatinnihal532-hub/spwm-inverter-model" target="_blank" rel="noopener">Code &#8599;</a><a href="https://colab.research.google.com/github/fatinnihal532-hub/spwm-inverter-model/blob/main/run_in_colab.ipynb" target="_blank" rel="noopener">Run it &#8599;</a></div>
         </div>
 
         <div class="proj" data-index="02">
