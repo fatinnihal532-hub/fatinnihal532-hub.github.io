@@ -287,6 +287,50 @@
     border-top:1px dashed var(--line-strong); padding-top:.8rem; width:100%;
   }
 
+
+  /* Featured strip */
+  .featured{ margin:1.8rem 0 1.6rem; }
+  .featured-head{
+    font-family:var(--font-mono); font-size:.74rem; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--copper); margin:0 0 .7rem;
+  }
+  .featured-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:.9rem; }
+  @media (max-width:900px){ .featured-grid{ grid-template-columns:1fr; } }
+  .feat{
+    display:flex; flex-direction:column; gap:.35rem; text-decoration:none; color:inherit;
+    border:1px solid var(--line); border-top:2px solid var(--copper); border-radius:3px;
+    background:var(--panel); padding:1rem 1.1rem; transition:transform .15s ease, border-color .15s ease;
+  }
+  .feat:hover{ transform:translateY(-2px); border-color:var(--copper); }
+  .feat-tag{ font-family:var(--font-mono); font-size:.7rem; color:var(--ink-faint); }
+  .feat-title{ font-weight:600; font-size:.98rem; line-height:1.35; color:var(--ink); }
+  .feat-line{ font-size:.86rem; color:var(--ink-soft); line-height:1.5; }
+  .feat-cta{ margin-top:auto; padding-top:.3rem; font-family:var(--font-mono); font-size:.76rem; color:var(--copper); }
+
+  /* Compact academic list */
+  .compact-list{ list-style:none; margin:0; padding:0; border-top:1px solid var(--line); }
+  .cl-row{
+    display:grid; grid-template-columns:9.5rem 1fr; gap:.15rem 1.2rem;
+    padding:.8rem 0; border-bottom:1px solid var(--line);
+  }
+  .cl-code{ font-family:var(--font-mono); font-size:.74rem; color:var(--ink-faint); padding-top:.15rem; grid-row:span 2; }
+  .cl-title{ font-weight:600; font-size:.95rem; }
+  .cl-desc{ font-size:.87rem; color:var(--ink-soft); }
+  .cl-desc .spec{ color:var(--copper); font-weight:600; }
+  @media (max-width:640px){ .cl-row{ grid-template-columns:1fr; } .cl-code{ grid-row:auto; } }
+
+  /* Collapsible extra repositories */
+  .more-proj{ margin-top:1.1rem; }
+  .more-proj > summary{
+    cursor:pointer; list-style:none; display:inline-flex; align-items:center; gap:.5rem;
+    font-family:var(--font-mono); font-size:.8rem; color:var(--copper);
+    border:1px solid var(--copper); border-radius:2px; padding:.35rem .8rem;
+  }
+  .more-proj > summary::-webkit-details-marker{ display:none; }
+  .more-proj > summary::after{ content:"+"; }
+  .more-proj[open] > summary::after{ content:"\2212"; }
+  .more-proj[open] > summary{ margin-bottom:1.1rem; }
+
   /* Timeline (experience/leadership) */
   .timeline{ border-left:1px solid var(--line); margin-left:.35rem; padding-left:1.5rem; }
   .tl-item{ position:relative; padding-bottom:1.6rem; }
@@ -530,6 +574,30 @@
         <div class="stat-tile"><span class="stat-num" data-target="3" data-decimals="0">0</span><span class="stat-label">Power Plants Visited</span></div>
       </div>
 
+      <div class="featured" aria-labelledby="featuredHead">
+        <p class="featured-head" id="featuredHead">Start here &middot; three featured projects</p>
+        <div class="featured-grid">
+          <a class="feat" href="writeups/hemt-design-space.html">
+            <span class="feat-tag">Device physics</span>
+            <span class="feat-title">AlGaN/GaN HEMT design-space search</span>
+            <span class="feat-line">432 designs searched; the Pareto front recovers the power-HEMT design rule on its own.</span>
+            <span class="feat-cta">Read the write-up &rarr;</span>
+          </a>
+          <a class="feat" href="writeups/rv32i-core.html">
+            <span class="feat-tag">Digital design / VLSI</span>
+            <span class="feat-title">RV32I RISC-V core in Verilog</span>
+            <span class="feat-line">Full base ISA, 32 tests, synthesized to 3,918 gates, plus the loop bug verification caught.</span>
+            <span class="feat-cta">Read the write-up &rarr;</span>
+          </a>
+          <a class="feat" href="writeups/spwm-inverter.html">
+            <span class="feat-tag">Power electronics</span>
+            <span class="feat-title">Three-phase SPWM inverter model</span>
+            <span class="feat-line">Measures the 15.4% bus-voltage gain of SVPWM against a theoretical 15.47%.</span>
+            <span class="feat-cta">Read the write-up &rarr;</span>
+          </a>
+        </div>
+      </div>
+
       <div class="hero-meta">
         <a href="mailto:fatinnihal532@gmail.com">fatinnihal532@gmail.com</a>
         <a href="https://linkedin.com/in/fatin-nihal-islam2002" target="_blank" rel="noopener">linkedin.com/in/fatin-nihal-islam2002</a>
@@ -590,7 +658,7 @@
           <div class="code"><span>Device physics</span><span>2026</span></div>
           <h3>AlGaN/GaN HEMT Design-Space Explorer</h3>
           <p>A compact model built on Ambacher&rsquo;s polarization charge control, with velocity saturation and source/drain access resistance, swept over 432 combinations of gate length, gate-drain spacing, barrier thickness and Al fraction. It extracts V<sub>th</sub>, g<sub>m</sub>, SS, DIBL and R<sub>on</sub> the way a TCAD post-processing script would, and finds the <span class="spec">R<sub>on</sub>&ndash;breakdown Pareto front</span>: every optimal design uses the shortest gate and highest Al fraction, and buys voltage with gate-drain spacing.</p>
-          <div class="links"><a href="https://github.com/fatinnihal532-hub/algan-gan-hemt-dse" target="_blank" rel="noopener">Code &#8599;</a><a href="https://colab.research.google.com/github/fatinnihal532-hub/algan-gan-hemt-dse/blob/main/run_in_colab.ipynb" target="_blank" rel="noopener">Run it &#8599;</a></div>
+          <div class="links"><a href="writeups/hemt-design-space.html">Write-up</a><a href="https://github.com/fatinnihal532-hub/algan-gan-hemt-dse" target="_blank" rel="noopener">Code &#8599;</a><a href="https://colab.research.google.com/github/fatinnihal532-hub/algan-gan-hemt-dse/blob/main/run_in_colab.ipynb" target="_blank" rel="noopener">Run it &#8599;</a></div>
         </div>
 
         <div class="proj" data-index="R2">
@@ -603,7 +671,7 @@
           <div class="code"><span>Digital design / VLSI</span><span>2026</span></div>
           <h3>RV32I RISC-V Core, from RTL to Gate-Level Netlist</h3>
           <p>A single-cycle CPU in Verilog implementing the full RV32I base integer ISA, with a two-pass assembler written from scratch so test programs are readable source. Verified by 30 directed instruction tests and two end-to-end programs checked against independent Python models, linted with Verilator, and synthesized with Yosys to <span class="spec">3,918 generic gates and 992 flip-flops</span> (technology-independent; no area or timing claimed without a real PDK). Verification caught a real bug: register-file forwarding that formed a combinational loop on <code>addi t0, t0, -1</code>.</p>
-          <div class="links"><a href="https://github.com/fatinnihal532-hub/rv32i-core" target="_blank" rel="noopener">Code &#8599;</a><a href="https://colab.research.google.com/github/fatinnihal532-hub/rv32i-core/blob/main/run_in_colab.ipynb" target="_blank" rel="noopener">Run it &#8599;</a></div>
+          <div class="links"><a href="writeups/rv32i-core.html">Write-up</a><a href="https://github.com/fatinnihal532-hub/rv32i-core" target="_blank" rel="noopener">Code &#8599;</a><a href="https://colab.research.google.com/github/fatinnihal532-hub/rv32i-core/blob/main/run_in_colab.ipynb" target="_blank" rel="noopener">Run it &#8599;</a></div>
         </div>
       </div>
     </section>
@@ -653,67 +721,57 @@
 
     <section id="projects" class="reveal">
       <div class="sec-head"><span class="num">05</span><h2>Academic Projects</h2><span class="rule"></span></div>
-
-      <div class="grid-2">
-        <div class="proj" data-index="01">
-          <div class="code"><span>EE 4200</span><span>2026</span></div>
-          <h3>Fire Alarm &amp; Protection System Design</h3>
-          <p>BNBC/NFPA-compliant zonal system for Dr. M.A. Rashid Hall: 58 smoke detectors, 8-zone FACP, <span class="spec">156-head</span> wet-pipe sprinkler network, full AutoCAD layouts, &asymp; BDT 5.3 lakh estimate.</p>
-        </div>
-        <div class="proj" data-index="02">
-          <div class="code"><span>EE 4206</span><span>2026</span></div>
-          <h3>Microstrip Patch Antenna (2.83 GHz)</h3>
-          <p>Circularly polarized patch antenna in Ansys HFSS 2024 R1 &mdash; <span class="spec">13.3 dBi</span> gain on a 41.90&times;34.92&nbsp;mm patch, with parametric VSWR and radiation-pattern analysis.</p>
-        </div>
-        <div class="proj" data-index="03">
-          <div class="code"><span>EE 4110</span><span>2025</span></div>
-          <h3>Single-Axis Solar Tracker</h3>
-          <p>Closed-loop tracker built on an <span class="spec">IRF540 MOSFET</span> H-bridge with TLP250 opto-isolated gate drive and Arduino proportional control, resolving shoot-through and gate-referencing issues.</p>
-        </div>
-        <div class="proj" data-index="04">
-          <div class="code"><span>EE 3200</span><span>2025</span></div>
-          <h3>Single-Phase Squirrel-Cage Induction Motor (900 W)</h3>
-          <p>Complete design of a <span class="spec">900 W, 220 V, 50 Hz</span> single-phase squirrel-cage induction motor at 1500 synchronous rpm, meeting 0.9 full-load efficiency and 0.82 power factor with Class F stator insulation.</p>
-        </div>
-        <div class="proj" data-index="05">
-          <div class="code"><span>EE 3108</span><span>2024</span></div>
-          <h3>Shell-Type Transformer (Crossover Winding)</h3>
-          <p>Complete electrical &amp; magnetic design &mdash; core sizing, turns/conductor calculations, insulation design, and loss/efficiency estimation against standard limits.</p>
-        </div>
-        <div class="proj" data-index="06">
-          <div class="code"><span>EE 3122</span><span>2024</span></div>
-          <h3>Newton-Raphson Load Flow Analysis</h3>
-          <p>Implemented the <span class="spec">Newton-Raphson method</span> for power system load flow analysis, evaluating convergence behaviour and computational performance.</p>
-        </div>
-        <div class="proj" data-index="07">
-          <div class="code"><span>EE 3114</span><span>2024</span></div>
-          <h3>BCD to Seven-Segment Decoder</h3>
-          <p>Designed and implemented a <span class="spec">BCD to seven-segment decoder</span> using combinational logic to drive a numeric seven-segment display.</p>
-        </div>
-      </div>
+      <p class="lede" style="margin:0 0 1rem">Course design projects at KUET, from building services to machines and power systems.</p>
+      <ul class="compact-list">
+        <li class="cl-row"><span class="cl-code">EE 4200 &middot; 2026</span><span class="cl-title">Fire Alarm &amp; Protection System Design</span><span class="cl-desc">BNBC/NFPA-compliant zonal system for Dr. M.A. Rashid Hall: 58 smoke detectors, 8-zone FACP, <span class="spec">156-head</span> wet-pipe sprinkler network, full AutoCAD layouts, &asymp; BDT 5.3 lakh estimate.</span></li>
+        <li class="cl-row"><span class="cl-code">EE 4206 &middot; 2026</span><span class="cl-title">Microstrip Patch Antenna (2.83 GHz)</span><span class="cl-desc">Circularly polarized patch antenna in Ansys HFSS 2024 R1 &mdash; <span class="spec">13.3 dBi</span> gain on a 41.90&times;34.92&nbsp;mm patch, with parametric VSWR and radiation-pattern analysis.</span></li>
+        <li class="cl-row"><span class="cl-code">EE 4110 &middot; 2025</span><span class="cl-title">Single-Axis Solar Tracker</span><span class="cl-desc">Closed-loop tracker built on an <span class="spec">IRF540 MOSFET</span> H-bridge with TLP250 opto-isolated gate drive and Arduino proportional control, resolving shoot-through and gate-referencing issues.</span></li>
+        <li class="cl-row"><span class="cl-code">EE 3200 &middot; 2025</span><span class="cl-title">Single-Phase Squirrel-Cage Induction Motor (900 W)</span><span class="cl-desc">Complete design of a <span class="spec">900 W, 220 V, 50 Hz</span> single-phase squirrel-cage induction motor at 1500 synchronous rpm, meeting 0.9 full-load efficiency and 0.82 power factor with Class F stator insulation.</span></li>
+        <li class="cl-row"><span class="cl-code">EE 3108 &middot; 2024</span><span class="cl-title">Shell-Type Transformer (Crossover Winding)</span><span class="cl-desc">Complete electrical &amp; magnetic design &mdash; core sizing, turns/conductor calculations, insulation design, and loss/efficiency estimation against standard limits.</span></li>
+        <li class="cl-row"><span class="cl-code">EE 3122 &middot; 2024</span><span class="cl-title">Newton-Raphson Load Flow Analysis</span><span class="cl-desc">Implemented the <span class="spec">Newton-Raphson method</span> for power system load flow analysis, evaluating convergence behaviour and computational performance.</span></li>
+        <li class="cl-row"><span class="cl-code">EE 3114 &middot; 2024</span><span class="cl-title">BCD to Seven-Segment Decoder</span><span class="cl-desc">Designed and implemented a <span class="spec">BCD to seven-segment decoder</span> using combinational logic to drive a numeric seven-segment display.</span></li>
+      </ul>
     </section>
 
     <section id="firmware" class="reveal">
       <div class="sec-head"><span class="num">06</span><h2>Firmware &amp; Simulation</h2><span class="rule"></span></div>
-      <p class="lede" style="margin:0 0 1.1rem">Eight repositories written from scratch, outside coursework. Five are firmware, four of which run end to end in a browser simulator, so anyone can open a link and watch the code execute without buying a single component. The last three are simulation models, two in power electronics and one in battery state estimation, where every figure and every number in the write-up is regenerated from the simulation and held against closed-form theory by a test suite. All three run in Google Colab from one click.</p>
+      <p class="lede" style="margin:0 0 1.1rem">Eight repositories written from scratch, outside coursework. Three are simulation models, two in power electronics and one in battery state estimation, where every figure and number is regenerated from the simulation and checked against closed-form theory by a test suite; each runs in Google Colab from one click. Five are firmware, and four of those run end to end in a browser simulator, so anyone can open a link and watch the code execute.</p>
 
       <div class="grid-2">
-        <div class="proj" data-index="01">
+        <div class="proj" data-index="01" id="project-spwm">
+          <div class="code"><span>Power Electronics</span><span>2026</span></div>
+          <h3>Three-Phase SPWM Inverter Model</h3>
+          <p>A two-level voltage source inverter solved as a block diagram on a fixed-step RK4 engine, comparing sinusoidal PWM against third-harmonic injection and SVPWM. Zero-sequence injection is <em>measured</em> to buy <span class="spec">15.4 % more line voltage</span> from the same DC bus, against a theoretical 15.47 % &mdash; or, read the other way, a bus 13.3 % lower for the same motor voltage. THD and the harmonic spectrum are taken from the simulated waveform, not quoted.</p>
+          <div class="links"><a href="writeups/spwm-inverter.html">Write-up</a><a href="https://github.com/fatinnihal532-hub/spwm-inverter-model" target="_blank" rel="noopener">Code &#8599;</a><a href="https://colab.research.google.com/github/fatinnihal532-hub/spwm-inverter-model/blob/main/run_in_colab.ipynb" target="_blank" rel="noopener">Run it &#8599;</a></div>
+        </div>
+
+        <div class="proj" data-index="02">
+          <div class="code"><span>Battery Management</span><span>2026</span></div>
+          <h3>Li-Ion SOC Estimation: Coulomb Counting vs. EKF</h3>
+          <p>A two-state Extended Kalman Filter measured against a Coulomb counter on a synthetic EV current profile through a Thevenin battery model with a realistic flat-plateau OCV curve. With a correct model both are already accurate; the gap shows up elsewhere &mdash; the EKF recovers from a 6-point SOC error in <span class="spec">16 s</span> where Coulomb counting never does, and it is far more sensitive to a wrong internal resistance than to a wrong capacity, the opposite of Coulomb counting's blind spot. Eleven checks in verify.py pin every claim to closed-form theory.</p>
+          <div class="links"><a href="https://github.com/fatinnihal532-hub/liion-soc-ekf" target="_blank" rel="noopener">Code &#8599;</a><a href="https://colab.research.google.com/github/fatinnihal532-hub/liion-soc-ekf/blob/main/run_in_colab.ipynb" target="_blank" rel="noopener">Run it &#8599;</a></div>
+        </div>
+
+        <div class="proj" data-index="03">
+          <div class="code"><span>Control / SMPS</span><span>2026</span></div>
+          <h3>Digital Buck Converter Control</h3>
+          <p>A 24 V to 12 V synchronous buck at 100 kHz and the digital loop around it: k-factor compensator design on a Bode plot, pre-warped Tustin discretisation, then a switching model that quantises the measurement and delays the computation by a sample. A <span class="spec">type III at 4 kHz</span> cuts the load-step dip from 13.9 % to 6.4 % and recovers nine times faster. One design is deliberately wrong, to show why phase margin alone is not a stability test.</p>
+          <div class="links"><a href="https://github.com/fatinnihal532-hub/digital-buck-control" target="_blank" rel="noopener">Code &#8599;</a><a href="https://colab.research.google.com/github/fatinnihal532-hub/digital-buck-control/blob/main/run_in_colab.ipynb" target="_blank" rel="noopener">Run it &#8599;</a></div>
+        </div>
+
+        <div class="proj" data-index="04">
           <div class="code"><span>AVR / C99</span><span>2026</span></div>
           <h3>Bare-Metal Digital Stopwatch (ATmega328P)</h3>
           <p>A four-digit stopwatch with no Arduino library call anywhere: <span class="spec">Timer1 in CTC mode</span> for the 10 ms time base, Timer2 overflow for display multiplexing and button sampling, and an integrator debouncer. Compiles to 1,086 bytes of flash and 31 bytes of RAM.</p>
           <figure class="fig"><svg viewBox="0 0 200 64" width="100%" role="img" aria-label="Four-digit seven-segment display counting, as driven by the firmware" style="display:block"><style>.sseg{fill:currentColor}.g00{opacity:1}.g01{opacity:1}.g02{opacity:1}.g03{opacity:1}.g04{opacity:1}.g05{opacity:1}.g06{opacity:.12}.g10{opacity:1}.g11{opacity:1}.g12{opacity:1}.g13{opacity:1}.g14{opacity:1}.g15{opacity:1}.g16{opacity:.12}@keyframes kg20{0%{opacity:1}10%{opacity:.12}20%{opacity:1}30%{opacity:1}40%{opacity:.12}50%{opacity:1}60%{opacity:1}70%{opacity:1}80%{opacity:1}90%{opacity:1}}.g20{animation:kg20 10s steps(1,end) infinite}@keyframes kg21{0%{opacity:1}10%{opacity:1}20%{opacity:1}30%{opacity:1}40%{opacity:1}50%{opacity:.12}60%{opacity:.12}70%{opacity:1}80%{opacity:1}90%{opacity:1}}.g21{animation:kg21 10s steps(1,end) infinite}@keyframes kg22{0%{opacity:1}10%{opacity:1}20%{opacity:.12}30%{opacity:1}40%{opacity:1}50%{opacity:1}60%{opacity:1}70%{opacity:1}80%{opacity:1}90%{opacity:1}}.g22{animation:kg22 10s steps(1,end) infinite}@keyframes kg23{0%{opacity:1}10%{opacity:.12}20%{opacity:1}30%{opacity:1}40%{opacity:.12}50%{opacity:1}60%{opacity:1}70%{opacity:.12}80%{opacity:1}90%{opacity:1}}.g23{animation:kg23 10s steps(1,end) infinite}@keyframes kg24{0%{opacity:1}10%{opacity:.12}20%{opacity:1}30%{opacity:.12}40%{opacity:.12}50%{opacity:.12}60%{opacity:1}70%{opacity:.12}80%{opacity:1}90%{opacity:.12}}.g24{animation:kg24 10s steps(1,end) infinite}@keyframes kg25{0%{opacity:1}10%{opacity:.12}20%{opacity:.12}30%{opacity:.12}40%{opacity:1}50%{opacity:1}60%{opacity:1}70%{opacity:.12}80%{opacity:1}90%{opacity:1}}.g25{animation:kg25 10s steps(1,end) infinite}@keyframes kg26{0%{opacity:.12}10%{opacity:.12}20%{opacity:1}30%{opacity:1}40%{opacity:1}50%{opacity:1}60%{opacity:1}70%{opacity:.12}80%{opacity:1}90%{opacity:1}}.g26{animation:kg26 10s steps(1,end) infinite}@keyframes kg30{0%{opacity:1}10%{opacity:.12}20%{opacity:1}30%{opacity:1}40%{opacity:.12}50%{opacity:1}60%{opacity:1}70%{opacity:1}80%{opacity:1}90%{opacity:1}}.g30{animation:kg30 1s steps(1,end) infinite}@keyframes kg31{0%{opacity:1}10%{opacity:1}20%{opacity:1}30%{opacity:1}40%{opacity:1}50%{opacity:.12}60%{opacity:.12}70%{opacity:1}80%{opacity:1}90%{opacity:1}}.g31{animation:kg31 1s steps(1,end) infinite}@keyframes kg32{0%{opacity:1}10%{opacity:1}20%{opacity:.12}30%{opacity:1}40%{opacity:1}50%{opacity:1}60%{opacity:1}70%{opacity:1}80%{opacity:1}90%{opacity:1}}.g32{animation:kg32 1s steps(1,end) infinite}@keyframes kg33{0%{opacity:1}10%{opacity:.12}20%{opacity:1}30%{opacity:1}40%{opacity:.12}50%{opacity:1}60%{opacity:1}70%{opacity:.12}80%{opacity:1}90%{opacity:1}}.g33{animation:kg33 1s steps(1,end) infinite}@keyframes kg34{0%{opacity:1}10%{opacity:.12}20%{opacity:1}30%{opacity:.12}40%{opacity:.12}50%{opacity:.12}60%{opacity:1}70%{opacity:.12}80%{opacity:1}90%{opacity:.12}}.g34{animation:kg34 1s steps(1,end) infinite}@keyframes kg35{0%{opacity:1}10%{opacity:.12}20%{opacity:.12}30%{opacity:.12}40%{opacity:1}50%{opacity:1}60%{opacity:1}70%{opacity:.12}80%{opacity:1}90%{opacity:1}}.g35{animation:kg35 1s steps(1,end) infinite}@keyframes kg36{0%{opacity:.12}10%{opacity:.12}20%{opacity:1}30%{opacity:1}40%{opacity:1}50%{opacity:1}60%{opacity:1}70%{opacity:.12}80%{opacity:1}90%{opacity:1}}.g36{animation:kg36 1s steps(1,end) infinite}</style><polygon class="sseg g00" points="12.0,8.0 28.0,8.0 26.0,12.0 14.0,12.0"/><polygon class="sseg g01" points="32.0,12.0 32.0,28.0 28.0,27.5 28.0,14.0"/><polygon class="sseg g02" points="32.0,32.0 32.0,48.0 28.0,46.0 28.0,32.5"/><polygon class="sseg g03" points="12.0,52.0 28.0,52.0 26.0,48.0 14.0,48.0"/><polygon class="sseg g04" points="8.0,32.0 8.0,48.0 12.0,46.0 12.0,32.5"/><polygon class="sseg g05" points="8.0,12.0 8.0,28.0 12.0,27.5 12.0,14.0"/><polygon class="sseg g06" points="14.0,28.0 26.0,28.0 28.0,30.0 26.0,32.0 14.0,32.0 12.0,30.0"/><polygon class="sseg g10" points="48.0,8.0 64.0,8.0 62.0,12.0 50.0,12.0"/><polygon class="sseg g11" points="68.0,12.0 68.0,28.0 64.0,27.5 64.0,14.0"/><polygon class="sseg g12" points="68.0,32.0 68.0,48.0 64.0,46.0 64.0,32.5"/><polygon class="sseg g13" points="48.0,52.0 64.0,52.0 62.0,48.0 50.0,48.0"/><polygon class="sseg g14" points="44.0,32.0 44.0,48.0 48.0,46.0 48.0,32.5"/><polygon class="sseg g15" points="44.0,12.0 44.0,28.0 48.0,27.5 48.0,14.0"/><polygon class="sseg g16" points="50.0,28.0 62.0,28.0 64.0,30.0 62.0,32.0 50.0,32.0 48.0,30.0"/><polygon class="sseg g20" points="92.0,8.0 108.0,8.0 106.0,12.0 94.0,12.0"/><polygon class="sseg g21" points="112.0,12.0 112.0,28.0 108.0,27.5 108.0,14.0"/><polygon class="sseg g22" points="112.0,32.0 112.0,48.0 108.0,46.0 108.0,32.5"/><polygon class="sseg g23" points="92.0,52.0 108.0,52.0 106.0,48.0 94.0,48.0"/><polygon class="sseg g24" points="88.0,32.0 88.0,48.0 92.0,46.0 92.0,32.5"/><polygon class="sseg g25" points="88.0,12.0 88.0,28.0 92.0,27.5 92.0,14.0"/><polygon class="sseg g26" points="94.0,28.0 106.0,28.0 108.0,30.0 106.0,32.0 94.0,32.0 92.0,30.0"/><polygon class="sseg g30" points="128.0,8.0 144.0,8.0 142.0,12.0 130.0,12.0"/><polygon class="sseg g31" points="148.0,12.0 148.0,28.0 144.0,27.5 144.0,14.0"/><polygon class="sseg g32" points="148.0,32.0 148.0,48.0 144.0,46.0 144.0,32.5"/><polygon class="sseg g33" points="128.0,52.0 144.0,52.0 142.0,48.0 130.0,48.0"/><polygon class="sseg g34" points="124.0,32.0 124.0,48.0 128.0,46.0 128.0,32.5"/><polygon class="sseg g35" points="124.0,12.0 124.0,28.0 128.0,27.5 128.0,14.0"/><polygon class="sseg g36" points="130.0,28.0 142.0,28.0 144.0,30.0 142.0,32.0 130.0,32.0 128.0,30.0"/><circle class="sseg" cx="80" cy="50" r="3.2"/></svg><figcaption>Display output &mdash; four digits multiplexed at 976 Hz</figcaption></figure>
           <div class="links"><a href="https://github.com/fatinnihal532-hub/avr-stopwatch-baremetal" target="_blank" rel="noopener">Code &#8599;</a><a href="https://wokwi.com/projects/475218749247186945" target="_blank" rel="noopener">Run it &#8599;</a></div>
         </div>
+      </div>
 
-        <div class="proj" data-index="02">
-          <div class="code"><span>FreeRTOS / ESP32</span><span>2026</span></div>
-          <h3>FreeRTOS Task Scheduler</h3>
-          <p>The job a superloop would do, rewritten as <span class="spec">five scheduled tasks</span>: a periodic producer on <code>vTaskDelayUntil</code>, a consumer blocking on a queue, shared state behind a mutex, and an alarm task woken from an ISR by task notification. A stats task reports stack headroom for each.</p>
-          <div class="links"><a href="https://github.com/fatinnihal532-hub/freertos-task-scheduler" target="_blank" rel="noopener">Code &#8599;</a><a href="https://wokwi.com/projects/475219714844478465" target="_blank" rel="noopener">Run it &#8599;</a></div>
-        </div>
-
-        <div class="proj" data-index="03">
+      <details class="more-proj">
+        <summary>Show 4 more repositories</summary>
+        <div class="grid-2">
+        <div class="proj" data-index="05">
           <div class="code"><span>Control</span><span>2026</span></div>
           <h3>Embedded PID Temperature Controller</h3>
           <p>A discrete PID loop at a fixed <span class="spec">10 Hz</span> with derivative on measurement and conditional-integration anti-windup, driving a first-order thermal plant with 2 s of transport delay. A Python model sweeps the gains; removing the windup guard alone pushes the same tuning to 23 % overshoot.</p>
@@ -721,41 +779,28 @@
           <div class="links"><a href="https://github.com/fatinnihal532-hub/embedded-pid-controller" target="_blank" rel="noopener">Code &#8599;</a><a href="https://wokwi.com/projects/475219089057232897" target="_blank" rel="noopener">Run it &#8599;</a></div>
         </div>
 
-        <div class="proj" data-index="04">
+        <div class="proj" data-index="06">
+          <div class="code"><span>FreeRTOS / ESP32</span><span>2026</span></div>
+          <h3>FreeRTOS Task Scheduler</h3>
+          <p>The job a superloop would do, rewritten as <span class="spec">five scheduled tasks</span>: a periodic producer on <code>vTaskDelayUntil</code>, a consumer blocking on a queue, shared state behind a mutex, and an alarm task woken from an ISR by task notification. A stats task reports stack headroom for each.</p>
+          <div class="links"><a href="https://github.com/fatinnihal532-hub/freertos-task-scheduler" target="_blank" rel="noopener">Code &#8599;</a><a href="https://wokwi.com/projects/475219714844478465" target="_blank" rel="noopener">Run it &#8599;</a></div>
+        </div>
+
+        <div class="proj" data-index="07">
           <div class="code"><span>ESP32</span><span>2026</span></div>
           <h3>Multi-Protocol Sensor Node</h3>
           <p>One board speaking <span class="spec">four buses at once</span>: 1-Wire to a DHT22, I2C to a character LCD, a 12-bit ADC set point, and CSV telemetry over UART at 115200 baud. Non-blocking throughout, with an exponential moving average so a single noisy sample cannot trip the alarm.</p>
           <div class="links"><a href="https://github.com/fatinnihal532-hub/esp32-sensor-node" target="_blank" rel="noopener">Code &#8599;</a><a href="https://wokwi.com/projects/475219333641877505" target="_blank" rel="noopener">Run it &#8599;</a></div>
         </div>
 
-        <div class="proj" data-index="05">
+        <div class="proj" data-index="08">
           <div class="code"><span>C99 / CI</span><span>2026</span></div>
           <h3>Embedded C Toolkit</h3>
           <p>Ring buffer, button debouncer, EMA and median filters, and a reusable PID block as portable C99 with no dynamic allocation. <span class="spec">678 unit-test checks</span> run on every push through GitHub Actions against gcc, clang and an avr-gcc cross-compile.</p>
           <div class="links"><a href="https://github.com/fatinnihal532-hub/embedded-c-toolkit" target="_blank" rel="noopener">Code &#8599;</a></div>
         </div>
-
-        <div class="proj" data-index="06">
-          <div class="code"><span>Power Electronics</span><span>2026</span></div>
-          <h3>Three-Phase SPWM Inverter Model</h3>
-          <p>A two-level voltage source inverter solved as a block diagram on a fixed-step RK4 engine, comparing sinusoidal PWM against third-harmonic injection and SVPWM. Zero-sequence injection is <em>measured</em> to buy <span class="spec">15.4 % more line voltage</span> from the same DC bus, against a theoretical 15.47 % &mdash; or, read the other way, a bus 13.3 % lower for the same motor voltage. THD and the harmonic spectrum are taken from the simulated waveform, not quoted.</p>
-          <div class="links"><a href="https://github.com/fatinnihal532-hub/spwm-inverter-model" target="_blank" rel="noopener">Code &#8599;</a><a href="https://colab.research.google.com/github/fatinnihal532-hub/spwm-inverter-model/blob/main/run_in_colab.ipynb" target="_blank" rel="noopener">Run it &#8599;</a></div>
         </div>
-
-        <div class="proj" data-index="07">
-          <div class="code"><span>Control / SMPS</span><span>2026</span></div>
-          <h3>Digital Buck Converter Control</h3>
-          <p>A 24 V to 12 V synchronous buck at 100 kHz and the digital loop around it: k-factor compensator design on a Bode plot, pre-warped Tustin discretisation, then a switching model that quantises the measurement and delays the computation by a sample. A <span class="spec">type III at 4 kHz</span> cuts the load-step dip from 13.9 % to 6.4 % and recovers nine times faster. One design is deliberately wrong, to show why phase margin alone is not a stability test.</p>
-          <div class="links"><a href="https://github.com/fatinnihal532-hub/digital-buck-control" target="_blank" rel="noopener">Code &#8599;</a><a href="https://colab.research.google.com/github/fatinnihal532-hub/digital-buck-control/blob/main/run_in_colab.ipynb" target="_blank" rel="noopener">Run it &#8599;</a></div>
-        </div>
-
-        <div class="proj" data-index="08">
-          <div class="code"><span>Battery Management</span><span>2026</span></div>
-          <h3>Li-Ion SOC Estimation: Coulomb Counting vs. EKF</h3>
-          <p>A two-state Extended Kalman Filter measured against a Coulomb counter on a synthetic EV current profile through a Thevenin battery model with a realistic flat-plateau OCV curve. With a correct model both are already accurate; the gap shows up elsewhere &mdash; the EKF recovers from a 6-point SOC error in <span class="spec">16 s</span> where Coulomb counting never does, and it is far more sensitive to a wrong internal resistance than to a wrong capacity, the opposite of Coulomb counting's blind spot. Eleven checks in verify.py pin every claim to closed-form theory.</p>
-          <div class="links"><a href="https://github.com/fatinnihal532-hub/liion-soc-ekf" target="_blank" rel="noopener">Code &#8599;</a><a href="https://colab.research.google.com/github/fatinnihal532-hub/liion-soc-ekf/blob/main/run_in_colab.ipynb" target="_blank" rel="noopener">Run it &#8599;</a></div>
-        </div>
-      </div>
+      </details>
     </section>
 
     <section id="industry" class="reveal">

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HEMT Design-Space Explorer · Fatin Nihal Islam</title>
+<meta name="description" content="A one-page write-up: searching 432 AlGaN/GaN HEMT designs with an analytical model to find the on-resistance versus breakdown-voltage Pareto front.">
+<meta property="og:image" content="https://fatinnihal532-hub.github.io/assets/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="writeup.css">
+</head>
+<body>
+<main class="wrap">
+  <a class="back" href="../#project-hemt-dse">&larr; Back to portfolio</a>
+
+  <p class="eyebrow">Write-up &middot; Device physics</p>
+  <h1>Searching the AlGaN/GaN HEMT design space instead of picking from it</h1>
+  <p class="meta">Fatin Nihal Islam &middot; 2026 &middot; <a href="https://github.com/fatinnihal532-hub/algan-gan-hemt-dse">code</a></p>
+
+  <div class="tldr">
+    <b>In one paragraph</b>
+    <p>I built an analytical AlGaN/GaN HEMT model that evaluates a design in milliseconds, then swept 432 combinations of gate length, gate-drain spacing, barrier thickness and Al fraction. Every design on the on-resistance versus breakdown-voltage Pareto front uses the shortest gate and the highest Al fraction, and buys voltage through gate-drain spacing. The search found that rule without being told it.</p>
+  </div>
+
+  <h2>The question</h2>
+  <p>My undergraduate thesis compared a few hand-picked gate structures in Silvaco TCAD. That kind of study is careful but narrow: each structure is a full simulation, so you can only afford a handful, and you choose them before you know where the good designs are. I wanted to know whether a lighter model could show the shape of the whole design space at once, cheaply enough to search it automatically.</p>
+
+  <h2>Approach</h2>
+  <p>The model is built from published device physics, not fitted curves:</p>
+  <ul>
+    <li><b>Channel charge.</b> Ambacher&rsquo;s spontaneous and piezoelectric polarization model sets the sheet charge at the AlGaN/GaN interface. The 2DEG density is then solved self-consistently against a single-subband Fermi-level relation.</li>
+    <li><b>Current.</b> A velocity-saturated charge-sheet model uses that charge, with source and drain access resistance solved against the terminal current. This is what makes the on-resistance/breakdown trade-off a real mechanism rather than an assumption.</li>
+    <li><b>Figures of merit.</b> V<sub>th</sub>, g<sub>m</sub>, subthreshold swing, DIBL, I<sub>on</sub>, R<sub>on,sp</sub> and a breakdown estimate are read off the simulated curves, the way a TCAD post-processing script would read them.</li>
+  </ul>
+  <p>A script, <code>verify.py</code>, checks 11 of the model&rsquo;s claims against closed-form theory, and 18 unit tests run in CI on every push. The whole 432-point sweep takes about five seconds.</p>
+
+  <h2>Result</h2>
+  <figure>
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="img/hemt_ron_bv_pareto_dark.svg">
+      <img src="img/hemt_ron_bv_pareto_light.svg" alt="On-resistance versus breakdown voltage for 432 HEMT designs, with the Pareto front highlighted">
+    </picture>
+    <figcaption>All 432 designs; the highlighted front is the set no other design beats on both axes.</figcaption>
+  </figure>
+  <table>
+    <tr><th>L<sub>g</sub> (nm)</th><th>L<sub>gd</sub> (&micro;m)</th><th>Barrier (nm)</th><th>x<sub>Al</sub></th><th>R<sub>on,sp</sub> (&Omega;&middot;mm)</th><th>BV (V)</th></tr>
+    <tr><td>100</td><td>1</td><td>20</td><td>0.30</td><td>0.544</td><td>330</td></tr>
+    <tr><td>100</td><td>2</td><td>20</td><td>0.30</td><td>0.783</td><td>660</td></tr>
+    <tr><td>100</td><td>4</td><td>25</td><td>0.30</td><td>1.252</td><td>1320</td></tr>
+    <tr><td>100</td><td>8</td><td>25</td><td>0.30</td><td>2.192</td><td>2640</td></tr>
+  </table>
+  <p>Two findings are worth stating plainly. First, the front runs almost entirely along gate-drain spacing: breakdown voltage rises in proportion to the spacing (the model&rsquo;s estimate is linear in it), and the price is on-resistance, paid through the access region&rsquo;s sheet resistance. Second, the barrier shifts from 20 to 25&nbsp;nm partway along the front. A thicker barrier holds a slightly denser 2DEG, which lowers the access-region resistance; once the drift region is long enough for that resistance to dominate, the saving outweighs the weaker gate control.</p>
+
+  <h2>What the model cannot tell you</h2>
+  <p>This is an analytical model, not TCAD, and some of its parts are deliberately approximate. Breakdown is a parallel-plate estimate that ignores field crowding at the gate edge. Subthreshold swing and DIBL come from an aspect-ratio proxy, so they show the right trend but not layout-specific numbers. Threshold voltages come out more negative than in fabricated devices, because the model applies the full polarization charge with no surface or trap charge to offset it. The trends across the sweep are the result; the absolute numbers are a plausibility check.</p>
+
+  <h2>What I would do next</h2>
+  <p>Replace the breakdown estimate with a two-dimensional field-crowding correction, add a small-signal model to study the RF side of the same trade-off, and cross-check a few points against a 1-D Schr&ouml;dinger&ndash;Poisson solve to bound the single-subband approximation.</p>
+
+  <div class="links">
+    <a href="https://github.com/fatinnihal532-hub/algan-gan-hemt-dse">Code and full README &#8599;</a>
+    <a href="https://colab.research.google.com/github/fatinnihal532-hub/algan-gan-hemt-dse/blob/main/run_in_colab.ipynb">Run it in Colab &#8599;</a>
+    <a href="../">Portfolio</a>
+  </div>
+</main>
+</body>
+</html>

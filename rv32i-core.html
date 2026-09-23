@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RV32I RISC-V Core · Fatin Nihal Islam</title>
+<meta name="description" content="A one-page write-up: a single-cycle RV32I CPU in Verilog, verified in simulation and synthesized with Yosys, and the combinational-loop bug verification caught.">
+<meta property="og:image" content="https://fatinnihal532-hub.github.io/assets/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="writeup.css">
+</head>
+<body>
+<main class="wrap">
+  <a class="back" href="../#project-rv32i">&larr; Back to portfolio</a>
+
+  <p class="eyebrow">Write-up &middot; Digital design / VLSI</p>
+  <h1>Building a RISC-V CPU, and the bug that only showed up as a hang</h1>
+  <p class="meta">Fatin Nihal Islam &middot; 2026 &middot; <a href="https://github.com/fatinnihal532-hub/rv32i-core">code</a></p>
+
+  <div class="tldr">
+    <b>In one paragraph</b>
+    <p>I wrote a single-cycle CPU in Verilog that runs the full RV32I base instruction set, plus an assembler so test programs are readable source. It passes 32 simulation tests and a Verilator lint, and synthesizes with Yosys to 3,918 generic gates and 992 flip-flops. The most useful thing it taught me came from a bug: a register-file shortcut I thought was necessary created a combinational loop, and the only symptom was a simulator that never finished.</p>
+  </div>
+
+  <h2>Why this project</h2>
+  <p>My other projects are device-level or system-level: HEMT physics, antennas, power converters, firmware. None of them involved designing digital logic in a hardware description language, which is the other half of the VLSI work I want to do in graduate school. A small CPU is the standard way to learn that half, because it forces every part of the flow: instruction decode, datapath design, verification and synthesis.</p>
+
+  <h2>Design</h2>
+  <figure>
+    <img class="light-only" src="img/rv32i_datapath.svg" alt="Block diagram of the single-cycle RV32I datapath: PC, instruction memory, control, immediate generator, register file, ALU and data memory">
+    <figcaption>The datapath. Every instruction completes in one clock cycle.</figcaption>
+  </figure>
+  <p>The core implements every RV32I instruction: arithmetic, logic, shifts, loads and stores of bytes, halfwords and words, all six branches, jumps, and the two upper-immediate instructions. It is single-cycle on purpose. A pipeline would add hazards, forwarding and stalls, and I wanted the first design to be one I could verify completely before adding that complexity.</p>
+  <p>I also wrote a two-pass assembler in Python rather than depending on the RISC-V GNU toolchain. It encodes all six instruction formats and a few pseudo-instructions, and it refuses inputs it cannot encode correctly instead of silently producing the wrong bits.</p>
+
+  <h2>Verification</h2>
+  <p>Every test runs the real RTL in Icarus Verilog and reads back the register file and data memory:</p>
+  <ul>
+    <li>30 instruction-level tests, aimed at the cases that are easy to get backwards: <code>sra</code> versus <code>srl</code>, <code>blt</code> versus <code>bltu</code> on the same operands, <code>lb</code> versus <code>lbu</code> sign extension.</li>
+    <li>Two complete programs, a recurrence and a bubble sort, checked against independent Python models rather than values copied from the simulator.</li>
+    <li>Verilator lint as a second, independent opinion on the RTL, and CI that reruns everything on each push.</li>
+  </ul>
+
+  <h2>The bug</h2>
+  <p>My first register file forwarded write data straight to the read ports, so an instruction reading a register in the same cycle it was written would see the new value. I assumed it was needed for correctness, as it is in a pipelined design. A single-cycle design does not need it: the value being written is the current instruction&rsquo;s own result, not an input to it.</p>
+  <p>Worse, it made a real loop. For <code>addi t0, t0, -1</code>, the ALU output fed the write port, the write port fed the read port, and the read port fed the ALU. The simulator never produced a wrong answer; it simply stopped advancing time. Tracing that hang back to a loop in the logic, and then to a design assumption carried over from pipelines, was the most useful part of the project. The fix was deleting the forwarding path.</p>
+
+  <h2>Synthesis</h2>
+  <p>Yosys maps the register file, ALU, immediate generator and control unit to generic logic gates: 3,918 combinational cells and 992 flip-flops (31 registers of 32 bits; register zero is hard-wired and needs none). The memories are excluded, because at any real size they would be SRAM macros, not flip-flops. These are logic-complexity counts. Without a real process design kit there is no honest area, power or clock-frequency figure, so I do not quote one.</p>
+
+  <h2>What I would do next</h2>
+  <p>Add the open SkyWater 130&nbsp;nm PDK and an OpenROAD place-and-route flow to get real area and timing numbers, then pipeline the core into five stages with the forwarding and hazard logic the single-cycle version avoids, and verify it with a directed hazard test suite.</p>
+
+  <div class="links">
+    <a href="https://github.com/fatinnihal532-hub/rv32i-core">Code and full README &#8599;</a>
+    <a href="https://colab.research.google.com/github/fatinnihal532-hub/rv32i-core/blob/main/run_in_colab.ipynb">Run it in Colab &#8599;</a>
+    <a href="../">Portfolio</a>
+  </div>
+</main>
+</body>
+</html>

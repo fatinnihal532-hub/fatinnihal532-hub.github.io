@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SPWM Inverter Model · Fatin Nihal Islam</title>
+<meta name="description" content="A one-page write-up: measuring, rather than quoting, the 15.47 percent DC-bus gain that zero-sequence injection gives a three-phase inverter.">
+<meta property="og:image" content="https://fatinnihal532-hub.github.io/assets/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="writeup.css">
+</head>
+<body>
+<main class="wrap">
+  <a class="back" href="../#project-spwm">&larr; Back to portfolio</a>
+
+  <p class="eyebrow">Write-up &middot; Power electronics</p>
+  <h1>Why industrial drives don&rsquo;t use plain sine PWM: measuring the 15% they leave on the table</h1>
+  <p class="meta">Fatin Nihal Islam &middot; 2026 &middot; <a href="https://github.com/fatinnihal532-hub/spwm-inverter-model">code</a></p>
+
+  <div class="tldr">
+    <b>In one paragraph</b>
+    <p>I simulated a three-phase inverter from scratch and compared three ways of generating its switching pattern. Adding a signal common to all three phases lets the inverter produce 15.4% more line voltage from the same DC bus, against a theoretical 15.47%. Put the other way, a motor drive can reach the same voltage from a bus 13.3% lower, which means cheaper, lower-rated switches. The simulation checks 11 of its results against textbook formulas every time it runs.</p>
+  </div>
+
+  <h2>The question</h2>
+  <p>Textbooks state that sinusoidal PWM runs out of room at a modulation index of 1, and that third-harmonic injection or space-vector PWM extends the range to 2/&radic;3. I wanted to see that result come out of a simulation of the actual switching waveform, with the distortion measured by FFT rather than assumed, instead of accepting it as a formula.</p>
+
+  <h2>Approach</h2>
+  <p>I wrote a small block-diagram simulator in Python (about 250 lines): blocks declare outputs and derivatives, a topological sort sets the execution order, and a fixed-step RK4 solver advances the continuous states. The inverter is built from those blocks: a three-phase reference, a triangular carrier, comparators, an ideal two-level bridge on a 600&nbsp;V bus, and a wye-connected RL load with a floating star point.</p>
+  <p>I chose the carrier at 1,950&nbsp;Hz, 39 times the 50&nbsp;Hz output, on purpose. An odd ratio removes even harmonics. A multiple of three moves the carrier harmonic itself into the zero sequence, where the line-to-line voltage cannot see it. The measured spectrum confirms it: the line at 39&times; the output frequency is 0.0009 of the fundamental.</p>
+
+  <h2>Result</h2>
+  <figure>
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="img/spwm_scheme_comparison_dark.svg">
+      <img src="img/spwm_scheme_comparison_light.svg" alt="Line-to-line output of SPWM, third-harmonic injection and SVPWM compared at their largest linear modulation index">
+    </picture>
+    <figcaption>Each scheme at its largest linear modulation index, same 600 V bus.</figcaption>
+  </figure>
+  <table>
+    <tr><th>Scheme</th><th>Max linear m</th><th>V<sub>ab,1</sub> peak</th><th>V<sub>rms</sub>/V<sub>dc</sub></th><th>Voltage THD</th></tr>
+    <tr><td>Sine PWM</td><td>1.000</td><td>520.0 V</td><td>0.6129</td><td>51.9%</td></tr>
+    <tr><td>Third-harmonic injection</td><td>1.155</td><td>600.1 V</td><td>0.7072</td><td>43.1%</td></tr>
+    <tr><td>SVPWM (min-max)</td><td>1.155</td><td>600.0 V</td><td>0.7071</td><td>42.5%</td></tr>
+  </table>
+  <p>The reason the gain is free is simple once you see it. The injected term is identical in all three phases, so it cancels in every line-to-line voltage, and with a floating star point it has no path to drive current. The load never sees it. What it does is pull the peaks of each phase reference back inside the carrier, so a larger fundamental fits. The model verifies this directly: with injection, the third harmonic in the line voltage is at the numerical floor.</p>
+  <p>One detail is worth noting. SVPWM is usually taught through sectors and vector dwell times, but the min-max form, which subtracts the mean of the largest and smallest reference from all three, lands within 0.1% of it in three lines of code.</p>
+
+  <h2>What the model leaves out</h2>
+  <p>The switches are ideal, so the model says nothing about losses or efficiency. There is no dead time, which in a real drive distorts the output near each current zero crossing. The load is a passive RL, not a motor with back-EMF. Those limits make it a tool for studying modulation, not for sizing a converter.</p>
+
+  <h2>What I would do next</h2>
+  <p>Add dead time and measure the distortion it causes at low current, then add conduction and switching losses so the same model can compare the efficiency of the three schemes, not just their voltage.</p>
+
+  <div class="links">
+    <a href="https://github.com/fatinnihal532-hub/spwm-inverter-model">Code and full README &#8599;</a>
+    <a href="https://colab.research.google.com/github/fatinnihal532-hub/spwm-inverter-model/blob/main/run_in_colab.ipynb">Run it in Colab &#8599;</a>
+    <a href="../">Portfolio</a>
+  </div>
+</main>
+</body>
+</html>
