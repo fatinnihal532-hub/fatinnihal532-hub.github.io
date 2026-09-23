@@ -303,6 +303,8 @@
   /* Projects */
   .grid-2{ display:grid; grid-template-columns:repeat(2,1fr); gap:1.1rem; }
   @media (max-width:640px){ .grid-2{ grid-template-columns:1fr; } }
+  .grid-2 > .proj.wide{ grid-column:1/-1; }
+  .proj code{ font-family:var(--font-mono); font-size:.82em; }
   .proj{
     border:1px solid var(--line); border-radius:3px; padding:1.2rem 1.3rem;
     background:var(--panel); transition:border-color .15s ease, transform .15s ease;
@@ -524,7 +526,7 @@
       <div class="stats" id="statsStrip">
         <div class="stat-tile"><span class="stat-num" data-target="3.88" data-decimals="2">0</span><span class="stat-label">CGPA / 4.00</span></div>
         <div class="stat-tile"><span class="stat-num"><span data-target="4" data-decimals="0">0</span><span class="unit">&times;</span></span><span class="stat-label">Dean&rsquo;s Awards</span></div>
-        <div class="stat-tile"><span class="stat-num" data-target="17" data-decimals="0">0</span><span class="stat-label">Engineering Projects</span></div>
+        <div class="stat-tile"><span class="stat-num" data-target="18" data-decimals="0">0</span><span class="stat-label">Engineering Projects</span></div>
         <div class="stat-tile"><span class="stat-num" data-target="3" data-decimals="0">0</span><span class="stat-label">Power Plants Visited</span></div>
       </div>
 
@@ -581,7 +583,7 @@
         <div class="paper-tag">&#9679;&nbsp; Paper based on this work &mdash; currently under peer review; results withheld until the review process concludes</div>
       </div>
 
-      <p class="lede" style="margin:1.6rem 0 1.1rem">Two independent computational studies that grow out of the thesis and the RF coursework. Both are analytical models, stated as such: no TCAD or full-wave result is claimed. Each is checked against theory or a textbook by its own test suite, and CI regenerates every figure.</p>
+      <p class="lede" style="margin:1.6rem 0 1.1rem">Three independent studies that extend the thesis toward the rest of semiconductor devices and VLSI. The HEMT and patch-antenna studies are analytical models, stated as such: no TCAD or full-wave result is claimed. The RISC-V core is synthesizable RTL, verified in simulation. Each is checked by its own test suite, and CI regenerates every figure.</p>
 
       <div class="grid-2">
         <div class="proj" data-index="R1" id="project-hemt-dse">
@@ -596,6 +598,12 @@
           <h3>Microstrip Patch Laminate Trade-off Study</h3>
           <p>Balanis&rsquo; cavity model of the rectangular patch, reproducing his worked examples to the printed digit (R<sub>in</sub> = 228.35&nbsp;&Omega;), extended with radiation, copper and dielectric Q. Can one patch on a stocked laminate cover the whole 2.4&nbsp;GHz ISM band at 80&nbsp;% efficiency? <span class="spec">No.</span> The best board misses by 0.06 percentage points, and FR-4 reaches the bandwidth only by losing 39&nbsp;% of its power as heat.</p>
           <div class="links"><a href="https://github.com/fatinnihal532-hub/microstrip-patch-synthesis" target="_blank" rel="noopener">Code &#8599;</a><a href="https://colab.research.google.com/github/fatinnihal532-hub/microstrip-patch-synthesis/blob/main/run_in_colab.ipynb" target="_blank" rel="noopener">Run it &#8599;</a></div>
+        </div>
+        <div class="proj wide" data-index="R3" id="project-rv32i">
+          <div class="code"><span>Digital design / VLSI</span><span>2026</span></div>
+          <h3>RV32I RISC-V Core, from RTL to Gate-Level Netlist</h3>
+          <p>A single-cycle CPU in Verilog implementing the full RV32I base integer ISA, with a two-pass assembler written from scratch so test programs are readable source. Verified by 30 directed instruction tests and two end-to-end programs checked against independent Python models, linted with Verilator, and synthesized with Yosys to <span class="spec">3,918 generic gates and 992 flip-flops</span> (technology-independent; no area or timing claimed without a real PDK). Verification caught a real bug: register-file forwarding that formed a combinational loop on <code>addi t0, t0, -1</code>.</p>
+          <div class="links"><a href="https://github.com/fatinnihal532-hub/rv32i-core" target="_blank" rel="noopener">Code &#8599;</a><a href="https://colab.research.google.com/github/fatinnihal532-hub/rv32i-core/blob/main/run_in_colab.ipynb" target="_blank" rel="noopener">Run it &#8599;</a></div>
         </div>
       </div>
     </section>
@@ -765,17 +773,17 @@
         <div class="skill-group">
           <h4>Software &amp; Tools</h4>
           <div class="chips">
-            <span class="chip">MATLAB/Simulink</span><span class="chip">Silvaco TCAD</span><span class="chip">Ansys HFSS</span><span class="chip">AutoCAD Electrical</span><span class="chip">Arduino IDE</span><span class="chip">FreeRTOS</span><span class="chip">Git &amp; GitHub</span><span class="chip">GitHub Actions (CI)</span><span class="chip">PLC Programming</span><span class="chip">MS Office</span>
+            <span class="chip">MATLAB/Simulink</span><span class="chip">Silvaco TCAD</span><span class="chip">Icarus Verilog</span><span class="chip">Yosys</span><span class="chip">Verilator</span><span class="chip">Ansys HFSS</span><span class="chip">AutoCAD Electrical</span><span class="chip">Arduino IDE</span><span class="chip">FreeRTOS</span><span class="chip">Git &amp; GitHub</span><span class="chip">GitHub Actions (CI)</span><span class="chip">PLC Programming</span><span class="chip">MS Office</span>
           </div>
         </div>
         <div class="skill-group">
           <h4>Programming</h4>
-          <div class="chips"><span class="chip">C (C99)</span><span class="chip">Embedded C</span><span class="chip">C++</span><span class="chip">Python</span></div>
+          <div class="chips"><span class="chip">Verilog HDL</span><span class="chip">C (C99)</span><span class="chip">Embedded C</span><span class="chip">C++</span><span class="chip">Python</span></div>
         </div>
         <div class="skill-group">
           <h4>Core Competencies</h4>
           <div class="chips">
-            <span class="chip">Circuit Design</span><span class="chip">Power Electronics</span><span class="chip">Antenna Design</span><span class="chip">Electrical Services &amp; Fire Protection</span><span class="chip">Signal Processing</span><span class="chip">Embedded Firmware</span><span class="chip">Control Systems</span>
+            <span class="chip">Circuit Design</span><span class="chip">Power Electronics</span><span class="chip">Antenna Design</span><span class="chip">Electrical Services &amp; Fire Protection</span><span class="chip">Signal Processing</span><span class="chip">Embedded Firmware</span><span class="chip">Digital Logic &amp; RTL Design</span><span class="chip">Control Systems</span>
           </div>
         </div>
         <div class="skill-group">
