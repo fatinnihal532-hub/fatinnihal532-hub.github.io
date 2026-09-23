@@ -9,6 +9,14 @@
 <meta property="og:title" content="Fatin Nihal Islam">
 <meta property="og:description" content="EEE graduate, KUET — AlGaN/GaN HEMT research, power electronics and RF projects.">
 <meta property="og:type" content="profile">
+<meta property="og:image" content="https://fatinnihal532-hub.github.io/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://fatinnihal532-hub.github.io/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Fatin Nihal Islam">
+<meta name="twitter:description" content="EEE graduate, KUET — AlGaN/GaN HEMT research, power electronics and RF projects.">
+<meta name="twitter:image" content="https://fatinnihal532-hub.github.io/assets/og-image.png">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>%E2%9A%A1</text></svg>">
 <style>*{margin:0;padding:0;box-sizing:border-box}</style>
 </head>
@@ -202,6 +210,11 @@
     color:var(--ink); font-size:.76rem;
   }
   .hero-meta .goal::before{ content:""; width:6px; height:6px; background:var(--copper); border-radius:50%; }
+  .hero-meta .cv-link{
+    border:1px solid var(--copper); border-radius:2px; padding:.22rem .7rem;
+    color:var(--copper); font-weight:500;
+  }
+  .hero-meta .cv-link:hover{ background:var(--copper); color:var(--paper); }
 
   section{ margin-bottom:3.4rem; scroll-margin-top:2rem; }
 
@@ -241,8 +254,9 @@
 
   /* Research feature */
   .research-card{
-    position:relative; background:var(--panel); border:1px solid var(--line);
-    border-radius:3px; padding:1.6rem 1.7rem; box-shadow:var(--shadow);
+    position:relative; background:var(--panel); border:1px solid var(--copper);
+    border-radius:3px; padding:1.7rem 1.8rem; box-shadow:0 1px 2px rgba(15,26,44,0.06), 0 14px 34px -10px rgba(168,103,42,.22);
+    margin-bottom:.2rem;
   }
   .research-card::before, .research-card::after{
     content:""; position:absolute; width:12px; height:12px; border:1.5px solid var(--copper);
@@ -250,6 +264,10 @@
   }
   .research-card::before{ top:-1px; left:-1px; border-right:none; border-bottom:none; }
   .research-card::after{ bottom:-1px; right:-1px; border-left:none; border-top:none; }
+  .research-card .rc-eyebrow{
+    font-family:var(--font-mono); font-size:.72rem; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--copper); margin-bottom:.55rem;
+  }
   .research-card .rc-title{
     font-family:var(--font-display); font-style:italic; font-weight:500; font-size:1.16rem;
     line-height:1.4; color:var(--navy-deep); margin:0 0 .5rem; text-wrap:balance;
@@ -501,7 +519,7 @@
         <circle cx="518" cy="26" r="3.4"></circle>
       </svg>
 
-      <p class="lede">Electrical &amp; Electronic Engineering graduate of Khulna University of Engineering &amp; Technology (<strong>CGPA 3.88/4.00</strong>, ranked 6th in the department, four-time Dean&rsquo;s Award recipient). My undergraduate thesis simulates AlGaN/GaN HEMT devices in Silvaco TCAD under Prof. Dr. Ashraful Ghani Bhuiyan, with a conference paper currently in preparation. Alongside research, I&rsquo;ve built hands-on projects spanning power electronics, RF/antenna design, electrical services engineering, and embedded firmware in C, and served as Technical Secretary of the IEEE Student Branch at KUET.</p>
+      <p class="lede">Electrical &amp; Electronic Engineering graduate of Khulna University of Engineering &amp; Technology (<strong>CGPA 3.88/4.00</strong>, ranked 6th in the department, four-time Dean&rsquo;s Award recipient). My undergraduate thesis simulates AlGaN/GaN HEMT devices in Silvaco TCAD under Prof. Dr. Ashraful Ghani Bhuiyan; a paper based on this work is currently under peer review. Alongside research, I&rsquo;ve built hands-on projects spanning power electronics, RF/antenna design, electrical services engineering, and embedded firmware in C, and served as Technical Secretary of the IEEE Student Branch at KUET.</p>
 
       <div class="stats" id="statsStrip">
         <div class="stat-tile"><span class="stat-num" data-target="3.88" data-decimals="2">0</span><span class="stat-label">CGPA / 4.00</span></div>
@@ -513,6 +531,7 @@
       <div class="hero-meta">
         <a href="mailto:fatinnihal532@gmail.com">fatinnihal532@gmail.com</a>
         <a href="https://linkedin.com/in/fatin-nihal-islam2002" target="_blank" rel="noopener">linkedin.com/in/fatin-nihal-islam2002</a>
+        <a href="assets/Fatin_Nihal_Islam_CV.pdf" target="_blank" rel="noopener" class="cv-link">Download CV &#8595;</a>
         <span class="goal">Seeking Lecturer &amp; Engineering/Research roles</span>
         <span class="goal">Pursuing MS/PhD — Semiconductor Devices/VLSI</span>
       </div>
@@ -551,19 +570,21 @@
       <div class="sec-head"><span class="num">03</span><h2>Research &amp; Thesis</h2><span class="rule"></span></div>
 
       <div class="research-card">
+        <div class="rc-eyebrow">Undergraduate Thesis</div>
         <p class="rc-title">&ldquo;Influence of Gate Architecture and Gate Position on the Performance of AlGaN/GaN High-Electron-Mobility Transistors&rdquo;</p>
         <div class="rc-meta">Supervised by <b>Dr. Ashraful Ghani Bhuiyan</b>, Professor, Dept. of EEE, KUET &nbsp;&middot;&nbsp; 2025&ndash;2026</div>
         <ul>
           <li>Simulating AlGaN/GaN HEMT device structures in Silvaco TCAD, comparing gate geometries on on/off ratio and transconductance.</li>
           <li>Performing literature review, modelling/simulation, and results analysis with regular supervisor consultation.</li>
+          <li>Directly motivated the <a href="#project-hemt-dse">HEMT design-space explorer</a> below, which extends the thesis with an independent, open-source analytical model.</li>
         </ul>
-        <div class="paper-tag">&#9679;&nbsp; Conference paper based on this work &mdash; in preparation</div>
+        <div class="paper-tag">&#9679;&nbsp; Paper based on this work &mdash; currently under peer review; results withheld until the review process concludes</div>
       </div>
 
       <p class="lede" style="margin:1.6rem 0 1.1rem">Two independent computational studies that grow out of the thesis and the RF coursework. Both are analytical models, stated as such: no TCAD or full-wave result is claimed. Each is checked against theory or a textbook by its own test suite, and CI regenerates every figure.</p>
 
       <div class="grid-2">
-        <div class="proj" data-index="R1">
+        <div class="proj" data-index="R1" id="project-hemt-dse">
           <div class="code"><span>Device physics</span><span>2026</span></div>
           <h3>AlGaN/GaN HEMT Design-Space Explorer</h3>
           <p>A compact model built on Ambacher&rsquo;s polarization charge control, with velocity saturation and source/drain access resistance, swept over 432 combinations of gate length, gate-drain spacing, barrier thickness and Al fraction. It extracts V<sub>th</sub>, g<sub>m</sub>, SS, DIBL and R<sub>on</sub> the way a TCAD post-processing script would, and finds the <span class="spec">R<sub>on</sub>&ndash;breakdown Pareto front</span>: every optimal design uses the shortest gate and highest Al fraction, and buys voltage with gate-drain spacing.</p>
