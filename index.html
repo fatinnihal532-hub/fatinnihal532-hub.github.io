@@ -307,6 +307,27 @@
   .feat-line{ font-size:.86rem; color:var(--ink-soft); line-height:1.5; }
   .feat-cta{ margin-top:auto; padding-top:.3rem; font-family:var(--font-mono); font-size:.76rem; color:var(--copper); }
 
+  /* 3D HEMT teaser */
+  .hemt3d{
+    display:grid; grid-template-columns:1.25fr 1fr; margin-top:.9rem; text-decoration:none; color:#EBEFF4;
+    background:#070d18; border:1px solid rgba(222,156,78,.35); border-radius:3px; overflow:hidden; position:relative;
+    transition:transform .15s ease, border-color .15s ease, box-shadow .25s ease;
+  }
+  .hemt3d:hover{ transform:translateY(-2px); border-color:#DE9C4E; box-shadow:0 16px 34px -16px rgba(222,156,78,.45); }
+  .hemt3d-media{ display:block; width:100%; height:100%; min-height:200px; object-fit:cover; background:#070d18; }
+  .hemt3d-copy{ display:flex; flex-direction:column; gap:.4rem; padding:1.1rem 1.2rem; justify-content:center;
+    background:linear-gradient(90deg, rgba(7,13,24,0) 0, #070d18 18%); }
+  .hemt3d-tag{ font-family:var(--font-mono); font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:#5FE3F0; }
+  .hemt3d-dot{ display:inline-block; width:7px; height:7px; border-radius:50%; background:#5FE3F0; box-shadow:0 0 8px #5FE3F0; margin-right:.45rem; vertical-align:1px; }
+  .hemt3d-title{ font-family:var(--font-display); font-weight:600; font-size:1.25rem; line-height:1.25; color:#F0B268; }
+  .hemt3d-line{ font-size:.86rem; line-height:1.5; color:#AAB7C9; }
+  .hemt3d .feat-cta{ color:#F0B268; }
+  @media (max-width:700px){
+    .hemt3d{ grid-template-columns:1fr; }
+    .hemt3d-media{ min-height:0; aspect-ratio:2/1; }
+    .hemt3d-copy{ background:#070d18; }
+  }
+
   /* Compact academic list */
   .compact-list{ list-style:none; margin:0; padding:0; border-top:1px solid var(--line); }
   .cl-row{
@@ -597,6 +618,15 @@
             <span class="feat-cta">Read the write-up &rarr;</span>
           </a>
         </div>
+        <a class="hemt3d" href="hemt-3d.html">
+          <video class="hemt3d-media" src="assets/hemt-3d-loop.mp4" poster="assets/hemt-3d-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+          <span class="hemt3d-copy">
+            <span class="hemt3d-tag"><span class="hemt3d-dot"></span>Interactive 3D</span>
+            <span class="hemt3d-title">Explore the AlGaN/GaN HEMT in 3D</span>
+            <span class="hemt3d-line">Rotate the device and change gate length, gate&ndash;drain spacing, barrier thickness and Al fraction. The geometry, 2DEG and metrics update live across all 432 designs.</span>
+            <span class="feat-cta">Open the 3D model &rarr;</span>
+          </span>
+        </a>
       </div>
 
       <div class="hero-meta">
@@ -660,7 +690,7 @@
           <div class="code"><span>Device physics</span><span>2026</span></div>
           <h3>AlGaN/GaN HEMT Design-Space Explorer</h3>
           <p>A compact model built on Ambacher&rsquo;s polarization charge control, with velocity saturation and source/drain access resistance, swept over 432 combinations of gate length, gate-drain spacing, barrier thickness and Al fraction. It extracts V<sub>th</sub>, g<sub>m</sub>, SS, DIBL and R<sub>on</sub> the way a TCAD post-processing script would, and finds the <span class="spec">R<sub>on</sub>&ndash;breakdown Pareto front</span>: every optimal design uses the shortest gate and highest Al fraction, and buys voltage with gate-drain spacing.</p>
-          <div class="links"><a href="hemt-design-space.html">Write-up</a><a href="https://github.com/fatinnihal532-hub/algan-gan-hemt-dse" target="_blank" rel="noopener">Code &#8599;</a><a href="https://colab.research.google.com/github/fatinnihal532-hub/algan-gan-hemt-dse/blob/main/run_in_colab.ipynb" target="_blank" rel="noopener">Run it &#8599;</a></div>
+          <div class="links"><a href="hemt-3d.html">3D model</a><a href="hemt-design-space.html">Write-up</a><a href="https://github.com/fatinnihal532-hub/algan-gan-hemt-dse" target="_blank" rel="noopener">Code &#8599;</a><a href="https://colab.research.google.com/github/fatinnihal532-hub/algan-gan-hemt-dse/blob/main/run_in_colab.ipynb" target="_blank" rel="noopener">Run it &#8599;</a></div>
         </div>
 
         <div class="proj" data-index="R2">
@@ -1005,6 +1035,7 @@
   })();
 
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion) { var hv = document.querySelector('.hemt3d-media'); if (hv) { hv.removeAttribute('autoplay'); hv.pause(); } }
 
   // ---- Rotating role word ----
   (function(){
